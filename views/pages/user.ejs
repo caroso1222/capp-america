@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<% include ../partials/head %>
+</head>
+<body ng-app="app" class="user">
+	<div class="main" ng-controller="mainController">
+		<div class="row main-row">
+			<div class="col s6 main-left">
+				<div class="row requirement-card">
+					<div class="col s12 m12">
+						<div class="card-panel white">
+							<ul class="collection">
+								<li class="collection-item indigo white-text title">Funcionalidades </li>
+								<li class="collection-item" ng-repeat="item in requirements" ng-class="{selected : item.selected}">
+									<span class="grey-text text-darken-4">{{item.description}}</span>
+									<div class="switch">
+										<label>
+											<input type="checkbox" ng-model="item.selected">
+											<span class="lever"></span>
+										</label>
+									</div>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>	
+			<div class="col s6 main-right white">
+			<div class="total-box red lighten-1">
+				<p class="lbl">Valor total</p>
+				<p class="value">{{totalReqCostVal+totalResourceCostVal | currency:"$":0}}</p>
+			</div>
+				<div class="row">
+					<div class="col s12">
+						<ul class="tabs">
+							<li class="tab col s3"><a class="active" href="#reqs">Requerimientos</a></li>
+							<li class="tab col s3"><a href="#resources">Dirección</a></li>
+						</ul>
+					</div>
+					<div id="reqs" class="col s12">
+						<table class="highlight">
+							<thead>
+								<tr>
+									<th data-field="id">Descripción</th>
+									<th data-field="name" class="center-align">Horas</th>
+									<th data-field="name" class="center-align">Costo</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr ng-repeat="item in requirements | filter:{selected:true}">
+									<td>{{item.description}}</td>
+									<td class="center-align">{{calculateReqHours(item)}}</td>
+									<td class="center-align">{{calculateReqCost(item) | currency:"$":0}}</td>
+								</tr>
+								<tr class="total">
+									<td>Total</td>
+									<td class="center-align">{{totalReqHours()}}</td>
+									<td class="center-align">{{totalReqCost() | currency:"$":0}}</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div id="resources" class="col s12">
+						<table class="highlight resources">
+							<thead>
+								<tr>
+									<th data-field="id">Recurso</th>
+									<th data-field="name" class="center-align">Tiempo (%)</th>
+									<th data-field="name" class="center-align">Horas</th>
+									<th data-field="name" class="center-align">Costo</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr ng-repeat="resource in resources">
+									<td>{{resource.name}}</td>
+									<td class="center-align">
+									<div class="percentage-wrapper">
+										<input ng-value={{resource.time_percentage}} class="center-align percentage-input" type="number" ng-model="resource.time_percentage"><span>%</span></input>
+									</div>
+									</td>
+									<td class="center-align">{{calculateResourceHours(resource)}}</td>
+									<td class="center-align">{{calculateResourceCosts(resource) | currency:"$":0}}</td>
+								</tr>
+								<tr class="total">
+									<td>Total</td><td></td>
+									<td class="center-align">{{totalHoursResource()}}</td>
+									<td class="center-align">{{totalCostsResource() | currency:"$":0}}</td>
+								</tr>
+							</tbody>						
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<% include ../partials/scripts %> 
+</body>
+</html>

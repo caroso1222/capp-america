@@ -1,0 +1,32 @@
+{
+  "name": "capp",
+  "version": "1.0.0",
+  "description": "Facebook bot for Copa America",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Carlos Roso",
+  "license": "ISC",
+  "devDependencies": {
+    "del": "^2.2.0",
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^3.1.0",
+    "gulp-concat": "^2.6.0",
+    "gulp-cssnano": "^2.1.2",
+    "gulp-jshint": "^2.0.0",
+    "gulp-livereload": "^3.8.1",
+    "gulp-nodemon": "^2.0.6",
+    "gulp-rename": "^1.2.2",
+    "gulp-ruby-sass": "^2.0.6",
+    "gulp-uglify": "^1.5.3"
+  },
+  "dependencies": {
+    "angular": "^1.5.5",
+    "body-parser": "^1.15.0",
+    "ejs": "^2.4.1",
+    "express": "^4.13.4",
+    "messenger-bot": "^2.3.0",
+    "mongoose": "^4.4.14"
+  }
+}

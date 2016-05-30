@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<% include ../partials/admin-head %>
+</head>
+<body ng-app="app" class="admin">
+	<div class="main" ng-controller="mainController">
+		<div class="row">
+			<div class="row tabs-wrapper">
+				<div class="col s8 offset-s2">
+					<ul class="tabs">
+						<li class="tab col s3"><a class="active" href="#reqs">Requerimientos</a></li>
+						<li class="tab col s3"><a href="#resources">Recursos</a></li>
+						<li class="tab col s3"><a href="#constants">Constantes</a></li>
+					</ul>
+				</div>
+				<div id="reqs" class="col s12">
+					<div class="col s8 offset-s2 table-wrapper z-depth-1">
+						<table class="highlight responsive-table">
+							<thead>
+								<tr>
+									<th data-field="description">Descripción</th>
+									<th data-field="design_hours" class="center-align">Horas Diseño</th>
+									<th data-field="frontend_hours" class="center-align">Horas Frontend</th>
+									<th data-field="backend_hours" class="center-align">Horas Backend</th>
+									<th data-field="integration_hours" class="center-align">Horas Integración</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr ng-repeat="req in requirements">
+									<td>{{req.description}}</td>
+									<td class="center-align">{{req.design_hours}}</td>
+									<td class="center-align">{{req.frontend_hours}}</td>
+									<td class="center-align">{{req.backend_hours}}</td>
+									<td class="center-align">{{req.integration_hours}}</td>
+								</tr>
+							</tbody>
+						</table>
+						<a class="btn-floating btn-large waves-effect waves-light red modal-trigger" href="#modal1"><i class="material-icons">add</i></a>
+					</div>
+				</div>
+				<div id="resources" class="col s12">
+					<div class="col s4 offset-s4 table-wrapper z-depth-1">
+						<table class="highlight responsive-table">
+							<thead>
+								<tr>
+									<th data-field="description">Recurso</th>
+									<th data-field="design_hours" class="center-align">Tiempo (%)</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr ng-repeat="resource in resources">
+									<td>{{resource.name}}</td>
+									<td class="center-align">{{resource.time_percentage}}</td>
+								</tr>
+							</tbody>
+						</table>
+						<a class="btn-floating btn-large waves-effect waves-light red modal-trigger" href="#modalResource"><i class="material-icons">add</i></a>
+					</div>
+				</div>
+				<div id="constants" class="col s12">
+					<div class="col s4 offset-s4 table-wrapper z-depth-1">
+						<table class="highlight responsive-table">
+							<div class="progress red lighten-4" ng-show="isSaving">
+								<div class="indeterminate red"></div>
+							</div>
+							<div class="thead-line" ng-hide="isSaving"></div>
+							<thead>
+								<tr>
+									<th data-field="description">Constante</th>
+									<th data-field="design_hours" class="center-align">Valor</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr ng-repeat="resource in resources">
+									<td>Salario {{resource.name}}</td>
+									<td class="center-align">
+										<div class="input-wrapper">
+											<input ng-value={{resource.wage}} class="center-align constant-input" type="text" pattern="[0-9]+([\.,][0-9]+)*" ng-model="resource.wage" ng-blur="saveSalary(resource)" ng-change = "setShouldSave()" format></input><span>$</span>
+										</div>
+									</td>
+								</tr>
+								<tr ng-repeat="constant in constants">
+									<td>{{constant.name}}</td>
+									<td class="center-align">
+										<div class="input-wrapper">
+											<input ng-value={{constant.value}} class="center-align constant-input" type="text" pattern="[0-9]+([\.,][0-9]+)*" ng-model="constant.value" ng-blur="saveConstant(constant)" ng-change = "setShouldSave()" format></input><span>$</span>
+										</div></td>
+								</tr>
+							</tbody>
+						</table>
+						<a class="btn-floating btn-large waves-effect waves-light red modal-trigger" href="#constantResource"><i class="material-icons">add</i></a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="modal1" class="modal">
+			<form ng-submit="addRequeriment()">
+				<div class="modal-content">
+					<div class="row">
+						<div class="col s12">
+							<div class="row">
+								<div class="input-field col s12">
+									<input id="description" type="text" length="40" ng-model = "requirement.description">
+									<label for="description">Descripción de requerimiento</label>
+								</div>
+							</div>
+						</div>
+						<div class="col s3">
+							<div class="row">
+								<div class="input-field col s12">
+									<input id="design_hours" type="number" ng-model = "requirement.design_hours">
+									<label for="design_hours">Horas Diseño</label>
+								</div>
+							</div>
+						</div>
+						<div class="col s3">
+							<div class="row">
+								<div class="input-field col s12">
+									<input id="frontend_hours" type="number" ng-model = "requirement.frontend_hours">
+									<label for="frontend_hours">Horas Frontend</label>
+								</div>
+							</div>
+						</div>
+						<div class="col s3">
+							<div class="row">
+								<div class="input-field col s12">
+									<input id="backend_hours" type="number" ng-model = "requirement.backend_hours">
+									<label for="backend_hours">Horas Backend</label>
+								</div>
+							</div>
+						</div>
+						<div class="col s3">
+							<div class="row">
+								<div class="input-field col s12">
+									<input id="integration_hours" type="number" ng-model = "requirement.integration_hours">
+									<label for="integration_hours">Horas Integración</label>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button class="modal-action modal-close waves-effect waves-green btn-flat" type="submit">Enviar</button>
+				</div>
+			</form>
+		</div>
+		<div id="modalResource" class="modal">
+			<form ng-submit="addResource()">
+				<div class="modal-content">
+					<div class="row">
+						<div class="col s7">
+							<div class="row">
+								<div class="input-field col s12">
+									<input id="name" type="text" length="40" ng-model = "resource.name">
+									<label for="name">Nombre de recurso</label>
+								</div>
+							</div>
+						</div>
+						<div class="col s5">
+							<div class="row">
+								<div class="input-field col s12">
+									<input id="time_percentage" type="number" ng-model = "resource.time_percentage">
+									<label for="time_percentage">Dedicación de tiempo (%)</label>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button class="modal-action modal-close waves-effect waves-green btn-flat" type="submit">Enviar</button>
+				</div>
+			</form>
+		</div>
+		<div id="constantResource" class="modal">
+			<form ng-submit="addConstant()">
+				<div class="modal-content">
+					<div class="row">
+						<div class="col s7">
+							<div class="row">
+								<div class="input-field col s12">
+									<input id="name" type="text" length="40" ng-model = "constant.name">
+									<label for="name">Nombre de constante</label>
+								</div>
+							</div>
+						</div>
+						<div class="col s5">
+							<div class="row">
+								<div class="input-field col s12">
+									<input id="time_percentage" type="number" ng-model = "constant.value">
+									<label for="time_percentage">Valor</label>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button class="modal-action modal-close waves-effect waves-green btn-flat" type="submit">Enviar</button>
+				</div>
+			</form>
+		</div>
+
+	</div>
+	<% include ../partials/admin-scripts %> 
+</body>
+</html>

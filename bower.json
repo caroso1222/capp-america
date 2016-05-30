@@ -1,0 +1,22 @@
+{
+  "name": "lemon",
+  "description": "Quoting and proposal software",
+  "main": "server.js",
+  "authors": [
+    "Carlos Roso"
+  ],
+  "license": "ISC",
+  "moduleType": [],
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "Materialize": "materialize#^0.97.6",
+    "angular": "^1.5.5"
+  }
+}

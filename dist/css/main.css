@@ -1,0 +1,74 @@
+html, body {
+  height: 100%;
+}
+
+body {
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  -webkit-overflow-scrolling: touch;
+  background-color: #fafafa;
+  color: #333333;
+  overflow-x: hidden;
+}
+
+.main {
+  height: 100%;
+}
+.main .main-row {
+  height: 100%;
+}
+
+.requirement-card {
+  position: relative;
+  margin-bottom: 1px;
+}
+.requirement-card .title {
+  font-weight: 500;
+}
+.requirement-card .switch {
+  float: right;
+  position: relative;
+  top: -2px;
+}
+.requirement-card .card-panel {
+  margin-bottom: 4px;
+  padding: 0;
+  border-radius: 5px;
+}
+.requirement-card .collection {
+  border-radius: 5px;
+  border: none;
+}
+.requirement-card .collection-item {
+  transition: all cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.5s;
+}
+.requirement-card .collection-item.selected {
+  background-color: #F5F5F9;
+}
+
+.main-left, .main-right {
+  height: 100%;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.main-row.row {
+  margin-bottom: 0px;
+}
+.main-row .main-right {
+  background-color: white;
+  border-left: 1px solid #E8E8E8;
+  padding: 4rem 2rem;
+}
+.main-row .main-left {
+  padding-top: 5rem;
+}
+
+tr.total {
+  font-weight: 500;
+  border-top: 1px solid #d0d0d0;
+}
+
+table.highlight > tbody > tr:hover {
+  background-color: #F9F9F9;
+}
