@@ -392,9 +392,10 @@ function identifyGratefulness(message){
 }
 
 var routes = function(app){
-	app.get('/', (req, res) => {
+	
+	/*app.get('/', (req, res) => {
 		return bot._verify(req, res)
-	})
+	})*/
 
 	app.post('/', (req, res) => {
 		bot._handleMessage(req.body)

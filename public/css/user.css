@@ -120,3 +120,47 @@ table.highlight > tbody > tr:hover {
   margin-bottom: 14px;
   margin-top: -13px;
 }
+
+.index .wrapper {
+  text-align: center;
+  display: table;
+  height: 100%;
+  margin-top: -30px;
+}
+.index .wrapper h1, .index .wrapper h2 {
+  color: #fc5d32;
+}
+.index .wrapper h1 {
+  font-size: 70px;
+  font-weight: 700;
+}
+.index .wrapper h2 {
+  font-size: 27px;
+  font-weight: 500;
+  margin-top: -2px;
+}
+.index .wrapper h3 {
+  font-size: 19px;
+  line-height: 30px;
+  color: #444444;
+  width: 73%;
+  display: block;
+  margin: 0 auto;
+  margin-top: 42px;
+  margin-bottom: 53px;
+}
+.index .wrapper h3 span {
+  font-size: 14px;
+  margin-top: 31px;
+  display: inline-block;
+  line-height: 23px;
+  color: #777777;
+}
+.index .wrapper a {
+  margin-top: 10px;
+  display: inline-block;
+}
+.index .wrapper .inner {
+  display: table-cell;
+  vertical-align: middle;
+}
