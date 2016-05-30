@@ -12,10 +12,10 @@ var initApp = function(){
 		extended: true
 	}));
 	app.set('view engine', 'ejs');
-	app.listen(3000);
+	app.listen(10909);
 	require('./app/routes/admin.routes')(app);
 	require('./app/routes/bot.routes')(app);
-	console.log("server running on port 3000");
+	console.log("server running on port 10909");
 }
 
 mongoose.connect(db.uri, db.options);
