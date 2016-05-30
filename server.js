@@ -15,6 +15,7 @@ var initApp = function(){
 	app.listen(10909);
 	require('./app/routes/admin.routes')(app);
 	require('./app/routes/bot.routes')(app);
+	require('./app/routes/user.routes')(app);
 	console.log("server running on port 10909");
 }
 
