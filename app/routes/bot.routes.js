@@ -301,7 +301,7 @@ function sendGoalToUser(in_payload, user_id){
 				{
 					title:'¡Gol de ' + in_payload.country +"!",
 					subtitle:info,
-					image_url:'http://i.imgur.com/ybeRUWz.png'
+					image_url:'http://i.imgur.com/Qj3trVa.jpg'
 				}
 				]
 			}
@@ -328,7 +328,34 @@ function sendMatchResults(in_payload, user_id){
 				{
 					title:result,
 					subtitle:in_payload.comment,
-					image_url:'http://i.imgur.com/pDQBRkj.jpg'
+					image_url:'http://i.imgur.com/UwNgclF.jpg'
+				}
+				]
+			}
+		}
+	}
+	console.log(send_payload);
+	bot.sendMessage(user_id, send_payload, function(err,info){
+		if (err){
+			return console.log(err);
+		}else{
+			console.log(info);
+		}
+	});
+}
+
+function sendMatchStart(in_payload, user_id){
+	var result = in_payload.team_1.country + " (0) - " + in_payload.team_2.country + " (0)";
+	var send_payload = {
+		'attachment':{
+			type: 'template',
+			payload: {
+				template_type:'generic',
+				elements:[
+				{
+					title:result,
+					subtitle:in_payload.comment,
+					image_url:'http://i.imgur.com/2bsRzkf.jpg'
 				}
 				]
 			}
@@ -413,6 +440,8 @@ var routes = function(app){
 							sendGoalToUser(req.body,elem.user_id);
 						}else if(req.body.type == 'match'){
 							sendMatchResults(req.body,elem.user_id);
+						}else if(req.body.type == 'start'){
+							sendMatchStart(req.body,elem.user_id);
 						}
 					}
 				});

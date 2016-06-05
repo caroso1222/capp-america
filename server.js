@@ -1,8 +1,14 @@
-var db = require('./config/db');
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
+var config_params = require('./config/params');
+
+if (config_params.environment == config_params.DEVELOPMENT){
+	var db = require('./config/db.development');
+}else{
+	var db = require('./config/db.production');
+}
 
 //Setting up database connection on mlab
 var initApp = function(){
