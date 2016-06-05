@@ -345,7 +345,7 @@ function sendMatchResults(in_payload, user_id){
 }
 
 function sendMatchStart(in_payload, user_id){
-	var result = in_payload.team_1.country + " (0) - " + in_payload.team_2.country + " (0)";
+	var result = in_payload.team_1.country + " - " + in_payload.team_2.country + "";
 	var send_payload = {
 		'attachment':{
 			type: 'template',
