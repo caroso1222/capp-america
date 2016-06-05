@@ -72,7 +72,7 @@ bot.on('message', (payload, reply) => {
 					if(identifyGratefulness(text)){
 						reply_text = {text:'Vale :(. Igual te voy a extrañar '+user.name+'.'}
 					}else{
-						reply_text = {text:'No entiendo lo que me dices '+user.name+', pero espero me disculpes si fueron molestas para ti las notificaciones.'}
+						reply_text = {text:'No entiendo lo que me dices '+user.name+', pero espero me disculpes si fueron molestas las notificaciones.'}
 					}
 					replyMessage(reply,reply_text);
 				});
