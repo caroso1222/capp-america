@@ -62,7 +62,7 @@ bot.on('message', (payload, reply) => {
 					if(identifyGratefulness(text)){
 						reply_text = {text:':D Ahora sí, a disfrutar esta Copa América ' + user.name +"!"}
 					}else{
-						reply_text = {text:'No entiendo lo que me dices '+user.name+', pero por favor disfruta mucho esta Copa América!'}
+						reply_text = {text: user.name+' recuerda que puedes conocer más sobre esta copa américa en http://cappcentenario.com/informacion/'}
 					}
 					replyMessage(reply,reply_text);
 				});
@@ -79,7 +79,7 @@ bot.on('message', (payload, reply) => {
 			}else{
 				//The user is sending random messages. 
 				//IF SOME AI FUNCTIONALITY IS TO BE IMPLEMENTED, THIS IS THE PLACE TO DO IT
-				var prompt = 'No entiendo lo que me dices '+user.name+'. ¿Quieres seguir recibiendo las notificaciones de esta Copa América?.'
+				var prompt = user.name + ', para conocer todo sobre la copa américa entra acá http://cappcentenario.com/informacion/. ¿Quieres seguir recibiendo las notificaciones de esta Copa América?.'
 				user.last_message = 'prompt';
 				user.save(function(err,obj){
 					if (err){
