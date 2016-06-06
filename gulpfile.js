@@ -32,6 +32,7 @@ gulp.task('watch', function() {
     livereload.listen();
     gulp.watch('public/css/**/*.scss', ['styles']);
     gulp.watch('public/js/*.js', ['scripts']);
+    gulp.watch('public/templates/**/*.html', ['scripts']);
     gulp.watch('views/**/*.ejs', ['ejs']);
 });
 

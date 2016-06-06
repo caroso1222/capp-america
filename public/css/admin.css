@@ -1,7 +1,19 @@
+.admin .big-card {
+  margin-top: 50px;
+}
+.admin .main-container {
+  position: relative;
+}
+.admin .nav-btn {
+  position: absolute;
+  right: 0;
+  height: 20px;
+  top: 20px;
+}
 .admin .card-action {
   text-align: right;
 }
-.admin .btn-large {
+.admin .card-action .btn-large {
   height: 42px;
   line-height: 42px;
   width: 100%;
@@ -9,6 +21,7 @@
 .admin .card-content {
   padding-top: 65px;
   margin-bottom: 0px;
+  position: relative;
 }
 .admin .header-btns {
   position: relative;
@@ -52,4 +65,38 @@
 }
 .admin .input-field textarea:focus + label {
   color: #536DFE;
+}
+
+.config-page .team, .config-page .score {
+  text-align: center;
+}
+.config-page .score {
+  color: #536DFE;
+}
+.config-page .score-group {
+  border-bottom: 1px solid #EAEAEA;
+  padding-bottom: 10px;
+  padding-top: 11px;
+}
+.config-page .score-group:nth-last-child(2) {
+  border-bottom: none;
+}
+.config-page .add-result {
+  position: absolute;
+  right: 20px;
+}
+
+#scoreModal {
+  width: 35%;
+}
+#scoreModal select {
+  -webkit-appearance: none;
+  -ms-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background: none;
+  border: none;
+  border-bottom: 1px solid #9e9e9e;
+  border-radius: 0px;
+  outline: none;
 }

@@ -1,0 +1,174 @@
+<div class="big-card config-page">
+	<div class="header-btns">
+		<ul class="tabs red lighten-1">
+			<li class="tab col s3"><a class="active white-text" href="" ng-click="active_card = 'scores'">Resultados</a></li>
+			<li class="tab col s3"><a class="white-text" href="" ng-click="active_card = 'calendar'">Calendario</a></li>
+		</ul>
+	</div>
+	<div class="content-slider">
+		<div class="wrapper">
+			<div class="card" ng-show="active_card == 'scores'">
+				<div class="card-content row">
+					<div class="score-group" ng-repeat="score in scores">
+						<div class="col s4 team">
+							<p>{{score.team_1}}</p>
+						</div>
+						<div class="col s2 score">
+							<p><b>{{score.team_1_score}}</b></p>
+						</div>
+						<div class="col s2 score">
+							<p><b>{{score.team_2_score}}</b></p>
+						</div>
+						<div class="col s4 team">
+							<p>{{score.team_2}}</p>
+						</div>
+						<div class="clearfix"></div>
+					</div>
+					<a class="btn-floating btn-large waves-effect waves-light indigo accent-2 add-result modal-trigger" href="#scoreModal"><i class="material-icons">add</i></a>
+				</div>
+			</div>
+			<div class="card" ng-show="active_card == 'calendar'">
+				<div class="card-content row">
+					<div class="input-field col s12">
+						<input placeholder="" id="scorer" type="text" class="validate" ng-model="goal.scorer_name">
+						<label for="scorer">Jugador que marcó el gol</label>
+					</div>
+					<div class="input-field col s9 m9">
+						<select class="icons" ng-model="goal.scorer_country">
+							<option value="" disabled selected>Seleccione el equipo</option>
+							<option value="Estados Unidos" data-icon="imgs/flag.png" class="left circle">Estados Unidos</option>
+							<option value="Colombia" data-icon="imgs/flag.png" class="left circle">Colombia</option>
+							<option value="Costa Rica" data-icon="imgs/flag.png" class="left circle">Costa Rica</option>
+							<option value="Paraguay" data-icon="imgs/flag.png" class="left circle">Paraguay</option>
+							<option value="Haití" data-icon="imgs/flag.png" class="left circle">Haití</option>
+							<option value="Perú" data-icon="imgs/flag.png" class="left circle">Perú</option>
+							<option value="Brasil" data-icon="imgs/flag.png" class="left circle">Brasil</option>
+							<option value="Ecuador" data-icon="imgs/flag.png" class="left circle">Ecuador</option>
+							<option value="Jamaica" data-icon="imgs/flag.png" class="left circle">Jamaica</option>
+							<option value="Venezuela" data-icon="imgs/flag.png" class="left circle">Venezuela</option>
+							<option value="México" data-icon="imgs/flag.png" class="left circle">México</option>
+							<option value="Uruguay" data-icon="imgs/flag.png" class="left circle">Uruguay</option>
+							<option value="Panamá" data-icon="imgs/flag.png" class="left circle">Panamá</option>
+							<option value="Bolivia" data-icon="imgs/flag.png" class="left circle">Bolivia</option>
+							<option value="Argentina" data-icon="imgs/flag.png" class="left circle">Argentina</option>
+							<option value="Chile" data-icon="imgs/flag.png" class="left circle">Chile</option>
+						</select>
+						<label>Equipo que marcó el gol</label>
+					</div>
+					<div class="input-field col s3">
+						<input placeholder="" id="scorer" type="number" class="validate" ng-model="goal.minute">
+						<label for="scorer">Minuto</label>
+					</div>
+					<h6>Nuevo marcador</h6>
+					<div class="input-field col s9 m9">
+						<select class="icons" ng-model="goal.team_1">
+							<option value="" disabled selected>Equipo 1</option>
+							<option value="Estados Unidos" data-icon="imgs/flag.png" class="left circle">Estados Unidos</option>
+							<option value="Colombia" data-icon="imgs/flag.png" class="left circle">Colombia</option>
+							<option value="Costa Rica" data-icon="imgs/flag.png" class="left circle">Costa Rica</option>
+							<option value="Paraguay" data-icon="imgs/flag.png" class="left circle">Paraguay</option>
+							<option value="Haití" data-icon="imgs/flag.png" class="left circle">Haití</option>
+							<option value="Perú" data-icon="imgs/flag.png" class="left circle">Perú</option>
+							<option value="Brasil" data-icon="imgs/flag.png" class="left circle">Brasil</option>
+							<option value="Ecuador" data-icon="imgs/flag.png" class="left circle">Ecuador</option>
+							<option value="Jamaica" data-icon="imgs/flag.png" class="left circle">Jamaica</option>
+							<option value="Venezuela" data-icon="imgs/flag.png" class="left circle">Venezuela</option>
+							<option value="México" data-icon="imgs/flag.png" class="left circle">México</option>
+							<option value="Uruguay" data-icon="imgs/flag.png" class="left circle">Uruguay</option>
+							<option value="Panamá" data-icon="imgs/flag.png" class="left circle">Panamá</option>
+							<option value="Bolivia" data-icon="imgs/flag.png" class="left circle">Bolivia</option>
+							<option value="Argentina" data-icon="imgs/flag.png" class="left circle">Argentina</option>
+							<option value="Chile" data-icon="imgs/flag.png" class="left circle">Chile</option>
+						</select>
+					</div>
+					<div class="input-field col s3 m3">
+						<input id="scorer" type="number" class="validate text-center" ng-model="goal.team_1_score">
+					</div>
+					<div class="input-field col s9 m9 away">
+						<select class="icons" ng-model="goal.team_2">
+							<option value="" disabled selected>Equipo 2</option>
+							<option value="Estados Unidos" data-icon="imgs/flag.png" class="left circle">Estados Unidos</option>
+							<option value="Colombia" data-icon="imgs/flag.png" class="left circle">Colombia</option>
+							<option value="Costa Rica" data-icon="imgs/flag.png" class="left circle">Costa Rica</option>
+							<option value="Paraguay" data-icon="imgs/flag.png" class="left circle">Paraguay</option>
+							<option value="Haití" data-icon="imgs/flag.png" class="left circle">Haití</option>
+							<option value="Perú" data-icon="imgs/flag.png" class="left circle">Perú</option>
+							<option value="Brasil" data-icon="imgs/flag.png" class="left circle">Brasil</option>
+							<option value="Ecuador" data-icon="imgs/flag.png" class="left circle">Ecuador</option>
+							<option value="Jamaica" data-icon="imgs/flag.png" class="left circle">Jamaica</option>
+							<option value="Venezuela" data-icon="imgs/flag.png" class="left circle">Venezuela</option>
+							<option value="México" data-icon="imgs/flag.png" class="left circle">México</option>
+							<option value="Uruguay" data-icon="imgs/flag.png" class="left circle">Uruguay</option>
+							<option value="Panamá" data-icon="imgs/flag.png" class="left circle">Panamá</option>
+							<option value="Bolivia" data-icon="imgs/flag.png" class="left circle">Bolivia</option>
+							<option value="Argentina" data-icon="imgs/flag.png" class="left circle">Argentina</option>
+							<option value="Chile" data-icon="imgs/flag.png" class="left circle">Chile</option>
+						</select>
+					</div>
+					<div class="input-field col s3 m3 away">
+						<input id="scorer" type="number" class="validate text-center" ng-model="goal.team_2_score">
+					</div>
+				</div>
+				<div class="card-action">
+					<a class="waves-effect waves-light btn-large indigo accent-2" ng-click="sendGoal()">Enviar</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="scoreModal" class="modal">
+	<div class="modal-content">
+		<div class="input-field col s9 m9">
+			<select class="icons browser-default" ng-model="score.team_1">
+				<option value="" disabled selected>Equipo 1</option>
+				<option value="Estados Unidos" data-icon="imgs/flag.png" class="left circle">Estados Unidos</option>
+				<option value="Colombia" data-icon="imgs/flag.png" class="left circle">Colombia</option>
+				<option value="Costa Rica" data-icon="imgs/flag.png" class="left circle">Costa Rica</option>
+				<option value="Paraguay" data-icon="imgs/flag.png" class="left circle">Paraguay</option>
+				<option value="Haití" data-icon="imgs/flag.png" class="left circle">Haití</option>
+				<option value="Perú" data-icon="imgs/flag.png" class="left circle">Perú</option>
+				<option value="Brasil" data-icon="imgs/flag.png" class="left circle">Brasil</option>
+				<option value="Ecuador" data-icon="imgs/flag.png" class="left circle">Ecuador</option>
+				<option value="Jamaica" data-icon="imgs/flag.png" class="left circle">Jamaica</option>
+				<option value="Venezuela" data-icon="imgs/flag.png" class="left circle">Venezuela</option>
+				<option value="México" data-icon="imgs/flag.png" class="left circle">México</option>
+				<option value="Uruguay" data-icon="imgs/flag.png" class="left circle">Uruguay</option>
+				<option value="Panamá" data-icon="imgs/flag.png" class="left circle">Panamá</option>
+				<option value="Bolivia" data-icon="imgs/flag.png" class="left circle">Bolivia</option>
+				<option value="Argentina" data-icon="imgs/flag.png" class="left circle">Argentina</option>
+				<option value="Chile" data-icon="imgs/flag.png" class="left circle">Chile</option>
+			</select>
+		</div>
+		<div class="input-field col s3 m3">
+			<input id="scorer" type="number" class="validate text-center" ng-model="score.team_1_score">
+		</div>
+		<div class="input-field col s9 m9 away">
+			<select class="icons browser-default" ng-model="score.team_2">
+				<option value="" disabled selected>Equipo 2</option>
+				<option value="Estados Unidos" data-icon="imgs/flag.png" class="left circle">Estados Unidos</option>
+				<option value="Colombia" data-icon="imgs/flag.png" class="left circle">Colombia</option>
+				<option value="Costa Rica" data-icon="imgs/flag.png" class="left circle">Costa Rica</option>
+				<option value="Paraguay" data-icon="imgs/flag.png" class="left circle">Paraguay</option>
+				<option value="Haití" data-icon="imgs/flag.png" class="left circle">Haití</option>
+				<option value="Perú" data-icon="imgs/flag.png" class="left circle">Perú</option>
+				<option value="Brasil" data-icon="imgs/flag.png" class="left circle">Brasil</option>
+				<option value="Ecuador" data-icon="imgs/flag.png" class="left circle">Ecuador</option>
+				<option value="Jamaica" data-icon="imgs/flag.png" class="left circle">Jamaica</option>
+				<option value="Venezuela" data-icon="imgs/flag.png" class="left circle">Venezuela</option>
+				<option value="México" data-icon="imgs/flag.png" class="left circle">México</option>
+				<option value="Uruguay" data-icon="imgs/flag.png" class="left circle">Uruguay</option>
+				<option value="Panamá" data-icon="imgs/flag.png" class="left circle">Panamá</option>
+				<option value="Bolivia" data-icon="imgs/flag.png" class="left circle">Bolivia</option>
+				<option value="Argentina" data-icon="imgs/flag.png" class="left circle">Argentina</option>
+				<option value="Chile" data-icon="imgs/flag.png" class="left circle">Chile</option>
+			</select>
+		</div>
+		<div class="input-field col s3 m3 away">
+			<input id="scorer" type="number" class="validate text-center" ng-model="score.team_2_score">
+		</div>
+	</div>
+	<div class="modal-footer">
+		<a href="" class=" modal-action modal-close waves-effect waves-green btn-flat" ng-click="registerScore()">Registrar</a>
+	</div>
+</div>
