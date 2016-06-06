@@ -6,6 +6,7 @@ const http = require('http')
 const express = require('express')
 const bodyParser = require('body-parser')
 const Bot = require('messenger-bot');
+const ai = require('../ai/engine')
 
 var config_params = require('../../config/params');
 
@@ -79,7 +80,11 @@ bot.on('message', (payload, reply) => {
 			}else{
 				//The user is sending random messages. 
 				//IF SOME AI FUNCTIONALITY IS TO BE IMPLEMENTED, THIS IS THE PLACE TO DO IT
-				var prompt = user.name + ', para conocer todo sobre la copa américa entra acá http://cappcentenario.com/informacion/. ¿Quieres seguir recibiendo las notificaciones de esta Copa América?.'
+
+				let response = ai.processMessage(text);
+				console.log(response);
+
+				var prompt = user.name + ', para conocer todo sobre la copa américa entra acá http://bit.ly/CappInfo. ¿Quieres seguir recibiendo las notificaciones de esta Copa América?.'
 				user.last_message = 'prompt';
 				user.save(function(err,obj){
 					if (err){
@@ -111,6 +116,7 @@ bot.on('message', (payload, reply) => {
 						if (err) return console.log(err);
 					});
 				});
+
 			}
 			if(reply_text.text!='empty'){
 				console.log('trying to send this message: ');
@@ -221,7 +227,7 @@ bot.on('postback', (payload, reply) => {
 					if(err){
 						reply_text = {text:'No pudimos eliminarte de nuestra lista de suscritos'}
 					}else{
-						reply_text = {text:'Entendido. No te enviaré notificaciones en esta Copa América. Nunca. Nunca jamás.'}
+						reply_text = {text:'Entendido. No te enviaré notificaciones en esta Copa América.'}
 					}
 					replyMessage(reply,reply_text);
 				});
