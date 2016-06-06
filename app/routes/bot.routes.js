@@ -83,39 +83,42 @@ bot.on('message', (payload, reply) => {
 
 				let response = ai.processMessage(text);
 				console.log(response);
-
-				var prompt = user.name + ', para conocer todo sobre la copa américa entra acá http://bit.ly/CappInfo. ¿Quieres seguir recibiendo las notificaciones de esta Copa América?.'
-				user.last_message = 'prompt';
-				user.save(function(err,obj){
-					if (err){
-						reply_text = {text:'Ups me chispotié. Algo salió mal.'};
-						replyMessage(reply,reply_text);
-					}
-					var reply_payload = {
-						'attachment':{
-							type: 'template',
-							payload: {
-								'template_type':'button',
-								'text':prompt,
-								'buttons':[
-								{
-									'type':'postback',
-									'title':'Si',
-									'payload':'Yes'
-								},
-								{
-									'type':'postback',
-									'title':'No',
-									'payload':'No'
+				if (response.intent && response.country){
+					console.log("voy a dar los siguiente resultados: " + response.country);
+				}else{
+					var prompt = user.name + ', para conocer todo sobre la copa américa entra acá http://bit.ly/CappInfo. ¿Quieres seguir recibiendo las notificaciones de esta Copa América?.'
+					user.last_message = 'prompt';
+					user.save(function(err,obj){
+						if (err){
+							reply_text = {text:'Ups me chispotié. Algo salió mal.'};
+							replyMessage(reply,reply_text);
+						}
+						var reply_payload = {
+							'attachment':{
+								type: 'template',
+								payload: {
+									'template_type':'button',
+									'text':prompt,
+									'buttons':[
+									{
+										'type':'postback',
+										'title':'Si',
+										'payload':'Yes'
+									},
+									{
+										'type':'postback',
+										'title':'No',
+										'payload':'No'
+									}
+									]
 								}
-								]
 							}
 						}
-					}
-					reply(reply_payload, function(err){
-						if (err) return console.log(err);
+						reply(reply_payload, function(err){
+							if (err) return console.log(err);
+						});
 					});
-				});
+				}				
 
 			}
 			if(reply_text.text!='empty'){
@@ -430,31 +433,31 @@ var routes = function(app){
 		return bot._verify(req, res)
 	})*/
 
-	app.post('/', (req, res) => {
-		bot._handleMessage(req.body)
-		res.end(JSON.stringify({status: 'ok'}))
-	});
+app.post('/', (req, res) => {
+	bot._handleMessage(req.body)
+	res.end(JSON.stringify({status: 'ok'}))
+});
 
-	app.post('/bot/send_message', (req, res) => {
-		User.count({}, function( err, count){
-			User.find(function(err,elems){
-				elems.forEach(function(elem,idx){
-					if(elem.status == 'subscribed'){
-						if (req.body.type == 'text'){
-							sendTextToUser(req.body.text,elem.user_id);
-						}else if(req.body.type == 'goal'){
-							sendGoalToUser(req.body,elem.user_id);
-						}else if(req.body.type == 'match'){
-							sendMatchResults(req.body,elem.user_id);
-						}else if(req.body.type == 'start'){
-							sendMatchStart(req.body,elem.user_id);
-						}
+app.post('/bot/send_message', (req, res) => {
+	User.count({}, function( err, count){
+		User.find(function(err,elems){
+			elems.forEach(function(elem,idx){
+				if(elem.status == 'subscribed'){
+					if (req.body.type == 'text'){
+						sendTextToUser(req.body.text,elem.user_id);
+					}else if(req.body.type == 'goal'){
+						sendGoalToUser(req.body,elem.user_id);
+					}else if(req.body.type == 'match'){
+						sendMatchResults(req.body,elem.user_id);
+					}else if(req.body.type == 'start'){
+						sendMatchStart(req.body,elem.user_id);
 					}
-				});
+				}
 			});
 		});
-		return res.send("Messages sucessfully sent");
 	});
+	return res.send("Messages sucessfully sent");
+});
 }
 
 

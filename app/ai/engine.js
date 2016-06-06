@@ -11,33 +11,54 @@ engine.processMessage = function(message){
 
 function identifyCountry(message){
 	var country = "none";
-	country = message.match(/lombia/i) ? "Colombia":"none"
-	country = message.match(/ruguay/i) ? "Uruguay":"none"
-	country = message.match(/stados/i) ? "Estados Unidos":"none"
-	country = message.match(/usa/i) ? "Estados Unidos":"none"
-	country = message.match(/raguay/i) ? "Paraguay":"none"
-	country = message.match(/aití/i) ? "Haití":"none"
-	country = message.match(/aiti/i) ? "Haití":"none"
-	country = message.match(/eru/i) ? "Perú":"none"
-	country = message.match(/erú/i) ? "Perú":"none"
-	country = message.match(/asil/i) ? "Brasil":"none"
-	country = message.match(/uador/i) ? "Ecuador":"none"
-	country = message.match(/maica/i) ? "Jamaica":"none"
-	country = message.match(/nezuela/i) ? "Venezuela":"none"
-	country = message.match(/xico/i) ? "México":"none"
-	country = message.match(/namá/i) ? "Panamá":"none"
-	country = message.match(/nama/i) ? "Panamá":"none"
-	country = message.match(/livia/i) ? "Bolivia":"none"
-	country = message.match(/gentina/i) ? "Argentina":"none"
-	country = message.match(/ile/i) ? "Chile":"none"
+	if(message.match(/lombia/i)){
+		country = "Colombia"
+	}else if(message.match(/ruguay/i)){
+		country = "Uruguay"
+	}else if(message.match(/stados/i)){
+		country = "Estados Unidos"
+	}else if(message.match(/usa/i)){
+		country = "Estados Unidos"
+	}else if(message.match(/raguay/i)){
+		country = "Paraguay"
+	}else if(message.match(/aití/i)){
+		country = "Haití"
+	}else if(message.match(/aiti/i)){
+		country = "Haití"
+	}else if(message.match(/eru/i)){
+		country = "Perú"
+	}else if(message.match(/erú/i)){
+		country = "Perú"
+	}else if(message.match(/asil/i)){
+		country = "Brasil"
+	}else if(message.match(/uador/i)){
+		country = "Ecuador"
+	}else if(message.match(/maica/i)){
+		country = "Jamaica"
+	}else if(message.match(/nezuela/i)){
+		country = "Venezuela"
+	}else if(message.match(/xico/i)){
+		country = "México"
+	}else if(message.match(/namá/i)){
+		country = "Panamá"
+	}else if(message.match(/nama/i)){
+		country = "Panamá"
+	}else if(message.match(/livia/i)){
+		country = "Bolivia"
+	}else if(message.match(/gentina/i)){
+		country = "Argentina"
+	}else if(message.match(/ile/i)){
+		country = "Chile"
+	}
+
 	return country
 }
 
 function identifyIntent(message){
 	var intent = "none"
-	if isScoresPrompt(message){
+	if (isScoresPrompt(message)){
 		intent = "scores"
-	}else if isCalendarPrompt(message){
+	}else if (isCalendarPrompt(message)){
 		intent = "calendar"
 	}
 	return intent;
@@ -49,7 +70,7 @@ function isScoresPrompt(message){
 	validation = validation || ((message.match(/uánto quedó/i)) ? true : false);
 	validation = validation || ((message.match(/uanto quedó/i)) ? true : false);
 	validation = validation || ((message.match(/uánto quedo/i)) ? true : false);
-	validation = ((message.match(/omo quedo/i)) ? true : false);
+	validation = validation || ((message.match(/omo quedo/i)) ? true : false);
 	validation = validation || ((message.match(/ómo quedó/i)) ? true : false);
 	validation = validation || ((message.match(/omo quedó/i)) ? true : false);
 	validation = validation || ((message.match(/ómo quedo/i)) ? true : false);
