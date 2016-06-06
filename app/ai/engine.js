@@ -43,18 +43,24 @@ function identifyIntent(message){
 	return intent;
 }
 
-//Returns 'true' is the user is asking for scores. Ej, cuanto quedo el partido, como le fue a colombia, etc. Returns 'false' otherwise
+//Returns 'true' if the user is asking for scores. Ej, cuanto quedo el partido, como le fue a colombia, etc. Returns 'false' otherwise
 function isScoresPrompt(message){
-	var validation = ((message.match(/si/i)) ? true : false)
-	validation = validation || ((message.match(/sí/i)) ? true : false)
-	validation = validation || ((message.match(/clar/i)) ? true : false)
-	validation = validation || ((message.match(/afirm/i)) ? true : false)
-	validation = validation || ((message.match(/perf/i)) ? true : false)
-	validation = validation || ((message.match(/vale/i)) ? true : false)
-	return validation
+	var validation = ((message.match(/uanto quedo/i)) ? true : false);
+	validation = validation || ((message.match(/uánto quedó/i)) ? true : false);
+	validation = validation || ((message.match(/uanto quedó/i)) ? true : false);
+	validation = validation || ((message.match(/uánto quedo/i)) ? true : false);
+	validation = ((message.match(/omo quedo/i)) ? true : false);
+	validation = validation || ((message.match(/ómo quedó/i)) ? true : false);
+	validation = validation || ((message.match(/omo quedó/i)) ? true : false);
+	validation = validation || ((message.match(/ómo quedo/i)) ? true : false);
+	validation = validation || ((message.match(/uién ganó/i)) ? true : false);
+	validation = validation || ((message.match(/uién gano/i)) ? true : false);
+	validation = validation || ((message.match(/uien ganó/i)) ? true : false);
+	validation = validation || ((message.match(/uien gano/i)) ? true : false);
+	return validation;
 }
 
-//Returns 'true' is the user is asking for match calendar. Ej, cuando juega, cuando vuelve a jugar, etc. Returns 'false' otherwise
+//Returns 'true' if the user is asking for match calendar. Ej, cuando juega, cuando vuelve a jugar, etc. Returns 'false' otherwise
 function isCalendarPrompt(message){
 	var validation = ((message.match(/si/i)) ? true : false)
 	validation = validation || ((message.match(/sí/i)) ? true : false)
