@@ -1,6 +1,7 @@
 'use strict'
 
 var engine = {};
+var 
 
 engine.processMessage = function(message){
 	let response = {}
@@ -16,7 +17,7 @@ function gi(message){
 	if(message.match(/lombia/i)){
 		countries.push("Colombia")
 	}if(message.match(/ruguay/i)){
-		country = "Uruguay"
+		countries.puch("Uruguay")
 	}if(message.match(/usa/i) || message.match(/usa/i)){
 		countries.push("Estados Unidos")
 	}if(message.match(/raguay/i)){
@@ -137,28 +138,6 @@ function isAggressiveMockingPrompt(message){
 	validation = validation || ((message.match(/pendejo/i)) ? true : false);
 	validation = validation || ((message.match(/gonhorrea/i)) ? true : false);
 	validation = validation || ((message.match(/pichurria/i)) ? true : false);
-	return validation
-}
-
-//Returns 'true' if we need to send complete results
-function isResultsAll(message){
-	var validation = false
-	if (isScoresPrompt(message))
-	{
-	validation = validation || (g1.count == 0) ? true : false)
-	validation = validation || (g1.count >= 3) ? true : false);
-	}
-	return validation
-}
-
-//Returns 'true' if we need to send complete results
-function isResultsAll(message){
-	var validation = false
-	if (isScoresPrompt(message))
-	{
-	validation = validation || (g1.count == 0) ? true : false)
-	validation = validation || (g1.count >= 3) ? true : false);
-	}
 	return validation
 }
 

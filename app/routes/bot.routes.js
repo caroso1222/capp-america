@@ -63,7 +63,7 @@ bot.on('message', (payload, reply) => {
 					if(identifyGratefulness(text)){
 						reply_text = {text:':D Ahora sí, a disfrutar esta Copa América ' + user.name +"!"}
 					}else{
-						reply_text = {text: user.name+'RECUERDA recuerda que puedes conocer más sobre esta copa américa en http://cappcentenario.com/informacion/'}
+						reply_text = {text: user.name+'recuerda que puedes conocer más sobre esta copa américa en http://cappcentenario.com/informacion/'}
 					}
 					replyMessage(reply,reply_text);
 				});
