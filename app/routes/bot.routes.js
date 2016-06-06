@@ -63,7 +63,7 @@ bot.on('message', (payload, reply) => {
 					if(identifyGratefulness(text)){
 						reply_text = {text:':D Ahora sí, a disfrutar esta Copa América ' + user.name +"!"}
 					}else{
-						reply_text = {text: user.name+' recuerda que puedes conocer más sobre esta copa américa en http://cappcentenario.com/informacion/'}
+						reply_text = {text: user.name+'RECUERDA recuerda que puedes conocer más sobre esta copa américa en http://cappcentenario.com/informacion/'}
 					}
 					replyMessage(reply,reply_text);
 				});
@@ -83,8 +83,9 @@ bot.on('message', (payload, reply) => {
 
 				let response = ai.processMessage(text);
 				console.log(response);
-				if (response.intent && response.country){
-					console.log("voy a dar los siguiente resultados: " + response.country);
+				if (response.intent == 'scores'){
+					if (response.countries.count == 1)
+					console.log("Voy a darte los resultados de un equipo específico" + response.country);
 				}else{
 					var prompt = user.name + ', para conocer todo sobre la copa américa entra acá http://bit.ly/CappInfo. ¿Quieres seguir recibiendo las notificaciones de esta Copa América?.'
 					user.last_message = 'prompt';
@@ -248,7 +249,6 @@ bot.on('postback', (payload, reply) => {
 		});		
 }
 });
-
 function getUser(user_id, cb){
 	User.findOne({user_id:user_id},function(err,user){ //Looks for the user in the DB
 		if(err){
