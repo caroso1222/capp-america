@@ -30,6 +30,7 @@ constants.pics = {
 }
 
 constants.getCountryCode = function(country){
+  console.log(country);
   return countryCodes[removeDiacritics(country).toLowerCase().replace(" ","_")]
 }
 
@@ -48,6 +49,7 @@ const countryCodes = {
   panama : "PA",
   bolivia : "BO",
   argentina : "AR",
+  colombia : "CO",
   chile : "CL"
 }
 

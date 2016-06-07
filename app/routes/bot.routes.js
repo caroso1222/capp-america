@@ -441,6 +441,7 @@ function sendMatchStart(in_payload, user_id) {
     var result = in_payload.team_1.country + " - " + in_payload.team_2.country + "";
     var key = constants.getCountryCode(in_payload.team_1.country) + "_" + constants.getCountryCode(in_payload.team_2.country);
     var img = constants.pics.start[key];
+		console.log(key);
     if (!img) {
         //try looking for the image in different order
         key = constants.getCountryCode(in_payload.team_2.country) + "_" + constants.getCountryCode(in_payload.team_1.country);
