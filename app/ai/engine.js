@@ -1,7 +1,6 @@
 'use strict'
 
 var engine = {};
-var 
 
 engine.processMessage = function(message){
 	let response = {}
@@ -12,12 +11,12 @@ engine.processMessage = function(message){
 }
 
 //Returns the list of teams the user is asking for
-function gi(message){
+function identifyCountries(message){
 	var countries = [];
 	if(message.match(/lombia/i)){
 		countries.push("Colombia")
 	}if(message.match(/ruguay/i)){
-		countries.puch("Uruguay")
+		countries.push("Uruguay")
 	}if(message.match(/usa/i) || message.match(/usa/i)){
 		countries.push("Estados Unidos")
 	}if(message.match(/raguay/i)){
@@ -76,8 +75,7 @@ function identifySpaceTime(message){
 		days = 0
 	}else if (message.match(/esta noche/i)){
 		days = 0
-	}else if (isScoresPrompt(message)); // Asume que si el usuario pregunta por resultados, es pasado
-	{
+	}else if (isScoresPrompt(message)){ // Asume que si el usuario pregunta por resultados, es pasado
 		days = -3
 	}else if (message.match(/pasado/i)){
 		days = -3
@@ -89,14 +87,13 @@ function identifySpaceTime(message){
 		days = 1
 	}else if (message.match(/pasado ma[ñn]a[nñ]a/i)){
 		days = 2
-	}
-	else if (message.match(/futuro/i)){
+	}else if (message.match(/futuro/i)){
 		days = 3
 	}else if (isCalendarPrompt(message)); // Asume que si el usuario pregunta por calendarios, es futuro
 	{
 		days = 3
 	}
-	return intent;
+	return days;
 }
 
 //Returns 'true' if the user is asking for scores. Ej, cuanto quedo el partido, como le fue a colombia, etc. Returns 'false' otherwise

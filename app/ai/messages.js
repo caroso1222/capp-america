@@ -1,9 +1,11 @@
-var response = {}
-​
-var resultadosTotal = "USA (0) - Colombia (2) :: Costa Rica (0) - Paraguay (0) :: Brasil (0) - Ecuador (0) :: Haití (0) - Perú (1) :: Jamaica (0) - Venezuela (1) :: México (3) - Uruguay (1)"
-var calendarioTotal = "Panamá - Bolivia (6-6-16 18:00h Bogotá Time) :: Argentina - Chile (6-6-16 21:00h Bogotá Time) :: USA - Costa Rica (7-6-16 19:00h Bogotá Time) :: Colombia - Paraguay (7-6-16 21:30h Bogotá Time) :: Brail - Haití (8-6-16 18:30h Bogotá Time) :: Ecuador - Perú (8-6-16 21:30h Bogotá Time) :: Uruguay - Venezuela (9-6-16 18:30h Bogotá Time) :: México - Jamaica (9-6-16 21:30h Bogotá Time) :: Chile - Bolivia (10-6-16 18:00h Bogotá Time) :: Argentina - Panamá (10-6-16 20:30h Bogotá Time)"
+'use strict'
 
-//{rude:true or false if the message have bad words, intents:['scores'], countries:['Colombia','Argentina','Bolivia'], mocking:true}
+var response = {}
+
+var resultadosTotal = "USA (0) - COL (2) \n CRO (0) - PAR (0) \n BRA (0) - ECU (0) \n HAI (0) - PER (1) \n JAM (0) - VEN (1) \n MEX (3) - URU (1)"
+var calendarioTotal = "PAN - BOL (6-6-16 18:00h) \n ARG - CHI (6-6-16 21:00h) \n USA - CRO (7-6-16 19:00h) \n COL - PAR (7-6-16 21:30h)"
+
+//{rude:true or false if the message have bad words, intent:['scores'], countries:['Colombia','Argentina','Bolivia'], mocking:true}
 response.getMessageToSend = function(engineOutput){
 	var message = ":)"
 	var reply = null
@@ -12,10 +14,10 @@ response.getMessageToSend = function(engineOutput){
 	if(engineOutput.rude){
 		message = "Uy, si usas malas palabras te dejo de hablar";
 	// USER WANTS TO KNOW MORE THAN ONE THING
-	}else if(engineOutput.intents.length > 1){
+	}else if(engineOutput.intent.length > 1){
 		message = "Veo que me quieres preguntar por muchas cosas, por favor intenta de una a la vez"
 	// USER WANTS TO KNOW ABOUT RESULTS
-	}else if((engineOutput.intents.length == 1)&&(engineOutput.intents.find == "scores")){
+	}else if((engineOutput.intent.length == 1)&&(engineOutput.intent[0] == "scores")){
 		message = "Puedo darte todos los resultados hasta el momento mientras aprendo a entenderte mejor."
 		reply = resultadosTotal
 		button = true //EN BOTOÓN: Para conocer el fixture completo entra acá (http://bit.ly/CappInfo)
@@ -33,7 +35,7 @@ response.getMessageToSend = function(engineOutput){
 		}
 		*/
 	// USER WANTS TO KNOW ABOUT CALENDAR
-	}else if((engineOutput.intents.length == 1)&&(engineOutput.intents.find == "calendar")){
+	}else if((engineOutput.intent.length == 1)&&(engineOutput.intent[0] == "calendar")){
 		message = "Puedo darte todo el fixture de la segunda fecha de la fase de grupos mientras aprendo a entenderte mejor."
 		reply = calendarioTotal
 		button = true //BUTTON: Para conocer el fixture completo entra acá (http://bit.ly/CappInfo)
@@ -52,7 +54,7 @@ response.getMessageToSend = function(engineOutput){
 		*/
 	}
 	// USER WANTS TO KNOW ABOUT NEWS
-	}else if((engineOutput.intents.length == 1)&&(engineOutput.intents.find == "news")){
+	else if((engineOutput.intent.length == 1)&&(engineOutput.intent[0] == "news")){
 		message = "Si estás buscando noticias de la Copa te recomiendo entrar a este portal"
 		button = true //BUTTON: Futbolred (http://bit.ly/PappFutbolRed)
 		/*
@@ -78,7 +80,10 @@ response.getMessageToSend = function(engineOutput){
 		*/
 
 	}
-	var fullmessage = {message, reply}
+	var fullmessage = {
+		message:message,
+		reply:reply
+	}
 	return fullmessage;
 }
 module.exports = response

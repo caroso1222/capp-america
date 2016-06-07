@@ -7,6 +7,7 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const Bot = require('messenger-bot');
 const ai = require('../ai/engine')
+const messager = require('../ai/messages')
 
 var config_params = require('../../config/params');
 
@@ -29,6 +30,7 @@ bot.on('error', (err) => {
 
 bot.on('message', (payload, reply) => {
 	let text = payload.message.text
+
 	getUser(payload.sender.id,function(err,user){
 		if(user){
 			// If the user exists in the database 	
@@ -81,11 +83,16 @@ bot.on('message', (payload, reply) => {
 				//The user is sending random messages. 
 				//IF SOME AI FUNCTIONALITY IS TO BE IMPLEMENTED, THIS IS THE PLACE TO DO IT
 
-				let response = ai.processMessage(text);
-				console.log(response);
-				if (response.intent == 'scores'){
-					if (response.countries.count == 1)
-					console.log("Voy a darte los resultados de un equipo específico" + response.country);
+				let engineOutput = ai.processMessage(text);
+				console.log(engineOutput);
+
+				if (true){
+					let messageToSend = messager.getMessageToSend(engineOutput);
+					console.log(messageToSend);
+					reply_text = {text:messageToSend.message}
+					replyMessage(reply,reply_text);
+					reply_text = {text:messageToSend.reply}
+					replyMessage(reply,reply_text);
 				}else{
 					var prompt = user.name + ', para conocer todo sobre la copa américa entra acá http://bit.ly/CappInfo. ¿Quieres seguir recibiendo las notificaciones de esta Copa América?.'
 					user.last_message = 'prompt';
@@ -121,14 +128,14 @@ bot.on('message', (payload, reply) => {
 					});
 				}				
 
-			}
+			}/*
 			if(reply_text.text!='empty'){
 				console.log('trying to send this message: ');
 				console.log(reply_text);
 				reply(reply_text, function(err){
 					if (err) return console.log(err);
 				});
-			}
+			}*/
 		}else{ 	
 			// If the user doesn't exists in the database get the incoming data and show first prompt
 			bot.getProfile(payload.sender.id, (err, profile) => {
