@@ -26,8 +26,9 @@
 						<input placeholder="" id="scorer" type="text" class="validate" ng-model="goal.scorer_name">
 						<label for="scorer">Jugador que marcó el gol</label>
 					</div>
+					<label>Equipo que marcó el gol</label>
 					<div class="input-field col s9 m9">
-						<select class="icons" ng-model="goal.scorer_country">
+						<select class="icons browser-default" ng-model="goal.scorer_country">
 							<option value="" disabled selected>Seleccione el equipo</option>
 							<option value="Estados Unidos" data-icon="imgs/flag.png" class="left circle">Estados Unidos</option>
 							<option value="Colombia" data-icon="imgs/flag.png" class="left circle">Colombia</option>
@@ -46,7 +47,9 @@
 							<option value="Argentina" data-icon="imgs/flag.png" class="left circle">Argentina</option>
 							<option value="Chile" data-icon="imgs/flag.png" class="left circle">Chile</option>
 						</select>
-						<label>Equipo que marcó el gol</label>
+						<div class="clearfix">
+
+						</div>
 					</div>
 					<div class="input-field col s3">
 						<input placeholder="" id="scorer" type="number" class="validate" ng-model="goal.minute">
@@ -54,7 +57,7 @@
 					</div>
 					<h6>Nuevo marcador</h6>
 					<div class="input-field col s9 m9">
-						<select class="icons" ng-model="goal.team_1">
+						<select class="icons browser-default" ng-model="goal.team_1">
 							<option value="" disabled selected>Equipo 1</option>
 							<option value="Estados Unidos" data-icon="imgs/flag.png" class="left circle">Estados Unidos</option>
 							<option value="Colombia" data-icon="imgs/flag.png" class="left circle">Colombia</option>
@@ -78,7 +81,7 @@
 						<input id="scorer" type="number" class="validate text-center" ng-model="goal.team_1_score">
 					</div>
 					<div class="input-field col s9 m9 away">
-						<select class="icons" ng-model="goal.team_2">
+						<select class="icons browser-default" ng-model="goal.team_2">
 							<option value="" disabled selected>Equipo 2</option>
 							<option value="Estados Unidos" data-icon="imgs/flag.png" class="left circle">Estados Unidos</option>
 							<option value="Colombia" data-icon="imgs/flag.png" class="left circle">Colombia</option>
@@ -109,7 +112,7 @@
 			<div class="card" ng-show="active_card == 'start'">
 				<div class="card-content row">
 					<div class="input-field col s12 m12 away">
-						<select class="icons" ng-model="start.team_1">
+						<select class="icons browser-default" ng-model="start.team_1">
 							<option value="" disabled selected>Equipo 1</option>
 							<option value="Bolivia" data-icon="imgs/flag.png" class="left circle">Bolivia</option>
 							<option value="Estados Unidos" data-icon="imgs/flag.png" class="left circle">Estados Unidos</option>
@@ -131,7 +134,7 @@
 						</select>
 					</div>
 					<div class="input-field col s12 m12 away">
-						<select class="icons" ng-model="start.team_2">
+						<select class="icons browser-default" ng-model="start.team_2">
 							<option value="" disabled selected>Equipo 2</option>
 							<option value="Estados Unidos" data-icon="imgs/flag.png" class="left circle">Estados Unidos</option>
 							<option value="Colombia" data-icon="imgs/flag.png" class="left circle">Colombia</option>
@@ -164,7 +167,7 @@
 		<div class="card" ng-show="active_card == 'match'">
 			<div class="card-content row">
 				<div class="input-field col s9 m9 away">
-					<select class="icons" ng-model="match.team_1">
+					<select class="icons browser-default" ng-model="match.team_1">
 						<option value="" disabled selected>Equipo 1</option>
 						<option value="Bolivia" data-icon="imgs/flag.png" class="left circle">Bolivia</option>
 						<option value="Estados Unidos" data-icon="imgs/flag.png" class="left circle">Estados Unidos</option>
@@ -189,7 +192,7 @@
 					<input id="scorer" type="number" class="validate text-center" ng-model="match.team_1_score">
 				</div>
 				<div class="input-field col s9 m9 away">
-					<select class="icons" ng-model="match.team_2">
+					<select class="icons browser-default" ng-model="match.team_2">
 						<option value="" disabled selected>Equipo 2</option>
 						<option value="Estados Unidos" data-icon="imgs/flag.png" class="left circle">Estados Unidos</option>
 						<option value="Colombia" data-icon="imgs/flag.png" class="left circle">Colombia</option>

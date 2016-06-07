@@ -1,4 +1,7 @@
-app.controller('configCtrl', function($scope,$http,$timeout){
+'use strict'
+
+angular.module('app.controllers',[])
+.controller('configCtrl', function($scope,$http,$timeout){
 	$(document).ready(function() {
 		$('select').material_select();
 		$('textarea').characterCounter();
@@ -6,52 +9,7 @@ app.controller('configCtrl', function($scope,$http,$timeout){
 		$('.modal-trigger').leanModal();
 	});
 
-	$scope.text = {};
-	$scope.goal = {};
-	$scope.match = {};
-	$scope.active_card = 'scores';
-
-	$scope.sendText = function(){
-		if($scope.text.text){
-			console.log($scope.text.text);
-			var payload = {
-				type:'text',
-				text:$scope.text.text
-			}
-			$http.post('/bot/send_message',payload)
-			.then(function success(response){
-				console.log(response);
-			},function error(response){
-				console.log(response);
-			});
-		}
-	}
-
-
-	$scope.sendGoal = function(){
-		var payload = {
-			type:'goal',
-			country: $scope.goal.scorer_country,
-			minute: $scope.goal.minute,
-			scorer:$scope.goal.scorer_name,
-			team_1:{
-				country:$scope.goal.team_1,
-				score:$scope.goal.team_1_score
-			},
-			team_2:{
-				country:$scope.goal.team_2,
-				score:$scope.goal.team_2_score
-			}
-		}
-		console.log(payload);
-		$http.post('/bot/send_message',payload)
-		.then(function success(response){
-			console.log(response);
-		},function error(response){
-			console.log(response);
-		});
-	}
-
+	$scope.scores = {}
 
 	function updateScores(){
 		$http.get('/api/scores')
@@ -83,6 +41,3 @@ app.controller('configCtrl', function($scope,$http,$timeout){
 
 	updateScores();
 });
-
-
-

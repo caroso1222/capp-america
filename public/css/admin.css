@@ -1,3 +1,6 @@
+.admin label {
+  display: block;
+}
 .admin .big-card {
   margin-top: 50px;
 }
