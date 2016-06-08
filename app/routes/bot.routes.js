@@ -136,7 +136,7 @@ bot.on('message', (payload, reply) => {
                             card.send(payload.sender.id)
                         }else{
                             reply_text = {
-                                text: messageToSend.message
+                                text: message.message
                             }
                             replyMessage(reply, reply_text);
                         }

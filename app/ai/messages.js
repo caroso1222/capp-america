@@ -48,7 +48,7 @@ var gral_payload = [];
 						let img = constants.pics.results[key];
 						if (!img) {
         					//try looking for the image in different order
-        					key = constants.getCountryCode(in_payload.team_2.country) + "_" + constants.getCountryCode(in_payload.team_1.country);
+        					key = constants.getCountryCode(elems[i].team_1) + "_" + constants.getCountryCode(elems[i].team_2);
         					img = constants.pics.results[key];
         					if (!img) {
         						img = 'http://i.imgur.com/UwNgclF.jpg'
