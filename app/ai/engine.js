@@ -17,7 +17,7 @@ function identifyCountries(message){
 		countries.push("Colombia")
 	}if(message.match(/ruguay/i)){
 		countries.push("Uruguay")
-	}if(message.match(/usa/i) || message.match(/usa/i)){
+	}if(message.match(/ados unid/i) || message.match(/usa/i)){
 		countries.push("Estados Unidos")
 	}if(message.match(/raguay/i)){
 		countries.push("Paraguay")

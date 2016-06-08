@@ -1,13 +1,14 @@
 'use strict'
 
-angular.module('app.controllers',[])
-.controller('configCtrl', function($scope,$http,$timeout){
+app.controller('configCtrl', function($scope,$http,$timeout){
 	$(document).ready(function() {
 		$('select').material_select();
 		$('textarea').characterCounter();
 		$('ul.tabs').tabs();
 		$('.modal-trigger').leanModal();
 	});
+
+    $scope.active_card = 'scores';
 
 	$scope.scores = {}
 

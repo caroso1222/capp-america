@@ -67,16 +67,16 @@ bot.on('message', (payload, reply) => {
                     }, function(err, doc) {
                         if (err) {
                             reply_text = {
-                                    text: 'No pudimos eliminarte de nuestra lista de suscritos'
-                                }
-                                //return res.send(500, {error:err});
-                        } else {
-                            reply_text = {
-                                text: 'Está bien. No te molestaré con notificaciones. Recuerda que puedes saludarme otra vez cuando quieras recibir notificaciones de la Copa América Centenario.'
+                                text: 'No pudimos eliminarte de nuestra lista de suscritos'
                             }
-                        }
-                        replyMessage(reply, reply_text);
-                    });
+                                //return res.send(500, {error:err});
+                            } else {
+                                reply_text = {
+                                    text: 'Está bien. No te molestaré con notificaciones. Recuerda que puedes saludarme otra vez cuando quieras recibir notificaciones de la Copa América Centenario.'
+                                }
+                            }
+                            replyMessage(reply, reply_text);
+                        });
                 } else {
                     reply_text = {
                         text: 'Por favor responde Si o No pues es lo único que puedo entender. ¿Deseas suscribirte a mis notificaciones?'
@@ -124,18 +124,23 @@ bot.on('message', (payload, reply) => {
 
                 let engineOutput = ai.processMessage(text);
                 console.log(engineOutput);
-
                 if (true) {
-                    let messageToSend = messager.getMessageToSend(engineOutput);
-                    console.log(messageToSend);
-                    reply_text = {
-                        text: messageToSend.message
-                    }
-                    replyMessage(reply, reply_text);
-                    reply_text = {
-                        text: messageToSend.reply
-                    }
-                    replyMessage(reply, reply_text);
+                    messager.getMessageToSend(engineOutput,function(err,message){
+                        if(message.type == "card"){
+                            let elems = message.payload
+                            let card = new CardCarrousel(bot)
+                            for (let i = 0; i<elems.length;i++){
+                                card.appendCard(elems[i].title,'',elems[i].image_url)
+                            }
+                            console.log(JSON.stringify(card.getBody()))
+                            card.send(payload.sender.id)
+                        }else{
+                            reply_text = {
+                                text: messageToSend.message
+                            }
+                            replyMessage(reply, reply_text);
+                        }
+                    })
                 } else {
                     var prompt = user.name + ', para conocer todo sobre la copa américa entra acá http://bit.ly/CappInfo. ¿Quieres seguir recibiendo las notificaciones de esta Copa América?.'
                     user.last_message = 'prompt';
@@ -168,18 +173,10 @@ bot.on('message', (payload, reply) => {
                             if (err) return console.log(err);
                         });
                     });
-                }
+}
 
-            }
-            /*
-            			if(reply_text.text!='empty'){
-            				console.log('trying to send this message: ');
-            				console.log(reply_text);
-            				reply(reply_text, function(err){
-            					if (err) return console.log(err);
-            				});
-            			}*/
-        } else {
+}
+} else {
             // If the user doesn't exists in the database get the incoming data and show first prompt
             bot.getProfile(payload.sender.id, (err, profile) => {
                 if (err) {
@@ -226,8 +223,8 @@ bot.on('message', (payload, reply) => {
 
                 })
             });
-        }
-    });
+}
+});
 })
 
 //Postback called when showing the notification permission prompt
@@ -272,9 +269,9 @@ bot.on('postback', (payload, reply) => {
                 });
             }
         });
-    } else {
-        User.findOne({
-            user_id: payload.sender.id
+} else {
+    User.findOne({
+        user_id: payload.sender.id
         }, function(err, user) { //Looks for the user in the DB
             if (err) {
                 reply_text = {
@@ -326,7 +323,7 @@ bot.on('postback', (payload, reply) => {
                 });
             }
         });
-    }
+}
 });
 
 function getUser(user_id, cb) {
@@ -386,7 +383,7 @@ function replyMessage(reply, replyText) {
 
 function sendGoalToUser(in_payload, user_id) {
     var info = in_payload.scorer + "\nMinuto " + in_payload.minute + "\n" +
-        in_payload.team_1.country + " (" + in_payload.team_1.score + ") - " + in_payload.team_2.country + " (" + in_payload.team_2.score + ")";
+    in_payload.team_1.country + " (" + in_payload.team_1.score + ") - " + in_payload.team_2.country + " (" + in_payload.team_2.score + ")";
     var send_payload = {
         'attachment': {
             type: 'template',
@@ -441,7 +438,7 @@ function sendMatchStart(in_payload, user_id) {
     var result = in_payload.team_1.country + " - " + in_payload.team_2.country + "";
     var key = constants.getCountryCode(in_payload.team_1.country) + "_" + constants.getCountryCode(in_payload.team_2.country);
     var img = constants.pics.start[key];
-		console.log(key);
+    console.log(key);
     if (!img) {
         //try looking for the image in different order
         key = constants.getCountryCode(in_payload.team_2.country) + "_" + constants.getCountryCode(in_payload.team_1.country);
@@ -529,33 +526,82 @@ var routes = function(app) {
     	return bot._verify(req, res)
     })*/
 
-    app.post('/', (req, res) => {
-        bot._handleMessage(req.body)
-        res.end(JSON.stringify({
-            status: 'ok'
-        }))
-    });
+app.post('/', (req, res) => {
+    bot._handleMessage(req.body)
+    res.end(JSON.stringify({
+        status: 'ok'
+    }))
+});
 
-    app.post('/bot/send_message', (req, res) => {
-        User.count({}, function(err, count) {
-            User.find(function(err, elems) {
-                elems.forEach(function(elem, idx) {
-                    if (elem.status == 'subscribed') {
-                        if (req.body.type == 'text') {
-                            sendTextToUser(req.body.text, elem.user_id);
-                        } else if (req.body.type == 'goal') {
-                            sendGoalToUser(req.body, elem.user_id);
-                        } else if (req.body.type == 'match') {
-                            sendMatchResults(req.body, elem.user_id);
-                        } else if (req.body.type == 'start') {
-                            sendMatchStart(req.body, elem.user_id);
-                        }
+app.post('/bot/send_message', (req, res) => {
+    User.count({}, function(err, count) {
+        User.find(function(err, elems) {
+            elems.forEach(function(elem, idx) {
+                if (elem.status == 'subscribed') {
+                    if (req.body.type == 'text') {
+                        sendTextToUser(req.body.text, elem.user_id);
+                    } else if (req.body.type == 'goal') {
+                        sendGoalToUser(req.body, elem.user_id);
+                    } else if (req.body.type == 'match') {
+                        sendMatchResults(req.body, elem.user_id);
+                    } else if (req.body.type == 'start') {
+                        sendMatchStart(req.body, elem.user_id);
                     }
-                });
+                }
             });
         });
-        return res.send("Messages sucessfully sent");
     });
+    return res.send("Messages sucessfully sent");
+});
+}
+
+//Append new card to existing card
+function appendCard(card,title,subtitle,img){
+    card.attachment.payload.elements.push({
+        title:title,
+        subtitle:subtitle,
+        image_url:img
+    });
+    return card
+}
+
+class CardCarrousel{
+    constructor(bot){
+        this.bot = bot
+        this.body = {
+            'attachment': {
+                type: 'template',
+                payload: {
+                    template_type: 'generic',
+                    elements: []
+                }
+            }
+        }
+    }
+
+    //append new element to card carrousel
+    appendCard(title,subtitle,img){
+        this.body.attachment.payload.elements.push({
+            title:title,
+            subtitle:subtitle,
+            image_url:img
+        })
+    }
+
+    getBody(){
+        return this.body
+    }
+
+    //sends this card to a user
+    send(user_id){
+        bot.sendMessage(user_id, this.body, function(err, info) {
+            if (err) {
+                return console.log(err);
+            } else {
+                console.log(info);
+            }
+        });
+    }
 }
 
 
