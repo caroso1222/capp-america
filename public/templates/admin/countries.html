@@ -1,0 +1,52 @@
+<div class="countries">
+  <div class="big-card config-page">
+  	<div class="header-btns">
+  		<ul class="tabs red lighten-1">
+  			<li class="tab col s3"><a class="active white-text" href="" ng-click="active_card = 'countries'">Paises</a></li>
+  			<li class="tab col s3"><a class="white-text" href="" ng-click="active_card = 'tournaments'">Torneos</a></li>
+  		</ul>
+  	</div>
+  	<div class="content-slider">
+  		<div class="wrapper">
+  			<div class="card" ng-show="active_card == 'countries'">
+  				<div class="card-content row">
+  					<div class="score-group" ng-repeat="tournament in tournaments">
+              <h5>  {{tournament.name}}</h5>
+              <p ng-repeat="country in tournament.countries | orderBy:'name'">
+                {{country.name}}
+              </p>
+  					</div>
+  					<a class="btn-floating btn-large waves-effect waves-light indigo accent-2 add-result modal-trigger" href="#countryModal"><i class="material-icons">add</i></a>
+  				</div>
+  			</div>
+  			<div class="card" ng-show="active_card == 'tournaments'">
+  				<div class="card-content row">
+            <h5 ng-repeat="tournament in tournaments">  {{tournament.name}}</h5>
+  				</div>
+  			</div>
+  		</div>
+  	</div>
+  </div>
+
+  <div id="countryModal" class="modal">
+  	<div class="modal-content">
+  		<div class="input-field col s12">
+  			<input id="scorer" type="text" class="validate text-center" ng-model="country.name">
+        <label for="scorer">Nombre del país</label>
+  		</div>
+  		<div class="input-field col s12">
+  			<input id="scorer" type="text" class="validate text-center" ng-model="country.code">
+        <label for="scorer">Código (2 letras)</label>
+  		</div>
+      <div class="input-field col s12">
+  			<select class="icons browser-default" ng-model="country.tournament">
+  				<option value="" disabled selected>Torneo</option>
+          <option ng-repeat="tournament in tournaments" value="{{tournament.code}}">{{tournament.name}}</option>
+  			</select>
+  		</div>
+  	</div>
+  	<div class="modal-footer">
+  		<a href="" class=" modal-action modal-close waves-effect waves-green btn-flat" ng-click="addCountry()">Registrar</a>
+  	</div>
+  </div>
+</div>
