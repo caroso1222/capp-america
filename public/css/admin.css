@@ -89,6 +89,10 @@
   right: 20px;
 }
 
+#countryModal {
+  width: 35%;
+}
+
 #scoreModal {
   width: 35%;
 }

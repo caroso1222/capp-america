@@ -18,7 +18,7 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider){
 	})
 	.state('countries',{
 		url:"/admin/countries",
-		templateUrl:"/templates/admin/config.html",
-		controller:'configCtrl'
+		templateUrl:"/templates/admin/countries.html",
+		controller:'countriesCtrl'
 	});
 });

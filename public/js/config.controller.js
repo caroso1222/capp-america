@@ -1,6 +1,6 @@
 'use strict'
 
-app.controller('configCtrl', function($scope,$http,$timeout){
+app.controller('configCtrl', function($scope,$http){
 	$(document).ready(function() {
 		$('select').material_select();
 		$('textarea').characterCounter();

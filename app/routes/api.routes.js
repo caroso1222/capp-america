@@ -1,5 +1,6 @@
 var Country = require('../models/country');
 var Score = require('../models/score');
+var Tournament = require('../models/tournament');
 
 var routes = function(app){
 	app.get('/api',function(req,res){
@@ -21,6 +22,34 @@ var routes = function(app){
 		})
 	});
 
+	app.get('/api/tournaments',function(req,res){
+		Tournament.find(function(err,elems){
+			if(err) return console.log(err);
+			res.send(elems);
+		})
+	});
+
+	app.get('/api/countries/:tournament',function(req,res){
+		Country.find({'tournament':req.params.tournament},function(err,elems){
+			if(err) return console.log(err);
+			res.send(elems);
+		})
+	});
+
+	app.get('/api/countries',function(req,res){
+		Country.find(function(err,elems){
+			if(err) return console.log(err);
+			res.send(elems);
+		})
+	});
+
+	app.post('/api/country',function(req,res){
+		var newCountry = new Country(req.body);
+		newCountry.save(function(err,obj){
+			if(err) return res.send(500, {error:err});
+			return res.send("sucessfully saved");
+		})
+	});
 
 	app.get('/requirements',function(req,res){
 		Requirement.find(function(err,elems){
@@ -76,11 +105,3 @@ var routes = function(app){
 }
 
 module.exports = routes;
-
-
-
-
-
-
-
-
