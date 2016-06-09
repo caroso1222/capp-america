@@ -382,29 +382,11 @@ function replyMessage(reply, replyText) {
 }
 
 function sendGoalToUser(in_payload, user_id) {
-    var info = in_payload.scorer + "\nMinuto " + in_payload.minute + "\n" +
-    in_payload.team_1.country + " (" + in_payload.team_1.score + ") - " + in_payload.team_2.country + " (" + in_payload.team_2.score + ")";
-    var send_payload = {
-        'attachment': {
-            type: 'template',
-            payload: {
-                template_type: 'generic',
-                elements: [{
-                    title: '¡Gol de ' + in_payload.country + "!",
-                    subtitle: info,
-                    image_url: 'http://i.imgur.com/Qj3trVa.jpg'
-                }]
-            }
-        }
-    }
-    console.log(send_payload);
-    bot.sendMessage(user_id, send_payload, function(err, info) {
-        if (err) {
-            return console.log(err);
-        } else {
-            console.log(info);
-        }
-    });
+    var info = in_payload.scorer + "\nMinuto " + in_payload.minute + "\n" + in_payload.team_1.country + " (" + in_payload.team_1.score + ") - " + in_payload.team_2.country + " (" + in_payload.team_2.score + ")";
+		let img = constants.pics.goals[constants.getCountryCode(in_payload.country)]
+		let carrousel = new CardCarrousel(bot)
+		carrousel.appendCard('¡Gol de '+in_payload.country+"!", info, img)
+		carrousel.send(user_id)
 }
 
 function sendMatchResults(in_payload, user_id) {
