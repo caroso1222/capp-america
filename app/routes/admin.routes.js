@@ -4,7 +4,7 @@ var Resource = require('../models/resource');
 var Constant = require('../models/constant');
 
 var routes = function(app){
-	app.get('/admin/*',function(req,res){
+	app.get('/admin*',function(req,res){
 		res.render('pages/admin');
 	});
 
