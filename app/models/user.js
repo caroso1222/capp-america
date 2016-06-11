@@ -5,6 +5,7 @@ var objectSchema = new Schema({
 	name: String,
 	lastname: String,
 	user_id: String,
+	tournaments: [],
 	last_message: String,
 	status: String //undefined, subscribed or unsubscribed
 },{

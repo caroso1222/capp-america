@@ -1,6 +1,7 @@
 var Country = require('../models/country');
 var Score = require('../models/score');
 var Tournament = require('../models/tournament');
+var User = require('../models/user');
 
 var routes = function(app){
 	app.get('/api',function(req,res){
@@ -93,6 +94,14 @@ var routes = function(app){
 			if(err) return console.log(err);
 			res.send(elems);
 		});
+	});
+
+	app.get('/updateUsers',function(req,res){
+		User.update({},{last_message:"none"},{multi:true},(err,raw)=>{
+		console.log(raw)
+			if(err) return res.send(500, {error:err});
+			return res.send(raw);
+		})
 	});
 
 	app.put('/constant/:id',function(req,res){

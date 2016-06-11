@@ -28,30 +28,66 @@ constants.pics = {
         US_PY: "http://imgur.com/hBP6PfD.jpg"
     },
     results: {
-        AR_BO: "http://imgur.com/QCl39dn.jpg",
-        AR_PA: "http://imgur.com/Jec5WBw.jpg",
-        BR_EC: "http://imgur.com/7dE4e2y.jpg",
-        BR_HT: "http://imgur.com/kTQpKCr.jpg",
-        BR_PE: "http://imgur.com/0IsqVrt.jpg",
-        CL_AR: "http://imgur.com/2Bus0pG.jpg",
-        CL_BO: "http://imgur.com/VakgjJp.jpg",
-        CL_PA: "http://imgur.com/LaEKhc3.jpg",
-        CO_CR: "http://imgur.com/LaEKhc3.jpg",
-        CO_PY: "http://imgur.com/RxbMy4x.jpg",
-        CR_PY: "http://imgur.com/rTm2f95.jpg",
-        EC_HT: "http://imgur.com/uzzh2cW.jpg",
-        EC_PE: "http://imgur.com/gHE5xf5.jpg",
-        HT_PE: "http://imgur.com/5uwEfwM.jpg",
-        JM_VE: "http://imgur.com/YfM6NCR.jpg",
-        MX_JM: "http://imgur.com/1a9Wq6o.jpg",
-        MX_UY: "http://imgur.com/MJ0Gwue.jpg",
-        MX_VE: "http://imgur.com/KiEFDHl.jpg",
-        PA_BO: "http://imgur.com/tISNrIh.jpg",
-        UY_JM: "http://imgur.com/xcDLwfA.jpg",
-        UY_VE: "http://imgur.com/5kJq4Eq.jpg",
-        US_CO: "http://imgur.com/IhirXoH.jpg",
-        US_CR: "http://imgur.com/kjYzyMI.jpg",
-        US_PY: "http://imgur.com/35Xjrpa.jpg"
+        AR_BO:"http://imgur.com/QCl39dn.jpg",
+        AR_PA:"http://imgur.com/Jec5WBw.jpg",
+        BR_EC:"http://imgur.com/7dE4e2y.jpg",
+        BR_HT:"http://imgur.com/kTQpKCr.jpg",
+        BR_PE:"http://imgur.com/0IsqVrt.jpg",
+        CL_AR:"http://imgur.com/2Bus0pG.jpg",
+        CL_BO:"http://imgur.com/VakgjJp.jpg",
+        CL_PA:"http://imgur.com/LaEKhc3.jpg",
+        CO_CR:"http://imgur.com/LaEKhc3.jpg",
+        CO_PY:"http://imgur.com/RxbMy4x.jpg",
+        CR_PY:"http://imgur.com/rTm2f95.jpg",
+        EC_HT:"http://imgur.com/uzzh2cW.jpg",
+        EC_PE:"http://imgur.com/gHE5xf5.jpg",
+        HT_PE:"http://imgur.com/5uwEfwM.jpg",
+        JM_VE:"http://imgur.com/YfM6NCR.jpg",
+        MX_JM:"http://imgur.com/1a9Wq6o.jpg",
+        MX_UY:"http://imgur.com/MJ0Gwue.jpg",
+        MX_VE:"http://imgur.com/KiEFDHl.jpg",
+        PA_BO:"http://imgur.com/tISNrIh.jpg",
+        UY_JM:"http://imgur.com/xcDLwfA.jpg",
+        UY_VE:"http://imgur.com/5kJq4Eq.jpg",
+        US_CO:"http://imgur.com/IhirXoH.jpg",
+        US_CR:"http://imgur.com/kjYzyMI.jpg",
+        US_PY:"http://imgur.com/35Xjrpa.jpg",
+        AL_CH:"http://imgur.com/HbYiCic.jpg",
+        AT_HU:"http://imgur.com/eCAq3Vf.jpg",
+        BE_IE:"http://imgur.com/3FHzfgV.jpg",
+        BE_IT:"http://imgur.com/9OOnAGR.jpg",
+        CH_FR:"http://imgur.com/7R2MQwf.jpg",
+        CZ_HR:"http://imgur.com/6U37uYf.jpg",
+        CZ_TR:"http://imgur.com/k8lL3P7.jpg",
+        EN_GA:"http://imgur.com/VtmZZdt.jpg",
+        EN_RU:"http://imgur.com/wBHbPrA.jpg",
+        EN_SK:"http://imgur.com/L288CVk.jpg",
+        ES_CZ:"http://imgur.com/WG0FKwi.jpg",
+        ES_HR:"http://imgur.com/Y7uqmla.jpg",
+        ES_TR:"http://imgur.com/to7808k.jpg",
+        FR_AL:"http://imgur.com/XwYOc8v.jpg",
+        FR_RO:"http://imgur.com/TCJvujF.jpg",
+        GA_SK:"http://imgur.com/YlwugKa.jpg",
+        GE_PO:"http://imgur.com/dGVGJWV.jpg",
+        GE_UA:"http://imgur.com/2qsrguQ.jpg",
+        HU_PT:"http://imgur.com/vJEnAJ5.jpg",
+        IE_SE:"http://imgur.com/2wIDyXP.jpg",
+        IS_AT:"http://imgur.com/svdgrYD.jpg",
+        IS_HU:"http://imgur.com/C0Ir6BU.jpg",
+        IT_IE:"http://imgur.com/6yHdy4q.jpg",
+        IT_SE:"http://imgur.com/QlIinJP.jpg",
+        NI_GE:"http://imgur.com/aWn0ddw.jpg",
+        PO_NI:"http://imgur.com/wu0z2ia.jpg",
+        PT_AT:"http://imgur.com/jfPyj3s.jpg",
+        PT_IS:"http://imgur.com/eKCXfMC.jpg",
+        RO_AL:"http://imgur.com/NNySUbB.jpg",
+        RO_CH:"http://imgur.com/eb7pSZK.jpg",
+        RU_GA:"http://imgur.com/T3G0jrP.jpg",
+        RU_SK:"http://imgur.com/Rvro1tF.jpg",
+        SE_BE:"http://imgur.com/HxUiioh.jpg",
+        TR_HR:"http://imgur.com/hGdrp5T.jpg",
+        UA_NI:"http://imgur.com/LHejvvM.jpg",
+        UA_PO:"http://imgur.com/djthuGv.jpg"
     },
     goals: {
         AR: "http://imgur.com/bOidB0E.jpg",
@@ -73,9 +109,27 @@ constants.pics = {
     }
 }
 
+constants.getPicForMatch = function(country_1, country_2, type) {
+    var key = country_1 + "_" + country_2
+    var img = constants.pics[type][key];
+    if (!img) {
+        //try looking for the image in different order
+        key = country_2 + "_" + country_1
+        img = constants.pics[type][key];
+    }
+    if (!img) {
+        img = 'http://i.imgur.com/2bsRzkf.jpg'
+    }
+    return img
+}
+
 constants.getCountryCode = function(country) {
-    console.log(country);
     return countryCodes[removeDiacritics(country).toLowerCase().replace(" ", "_")]
+}
+
+constants.tournaments = {
+    'EURO': 'Eurocopa',
+    'AMERICA': 'Copa América'
 }
 
 const countryCodes = {
@@ -368,7 +422,7 @@ for (var i = 0; i < defaultDiacriticsRemovalMap.length; i++) {
 function removeDiacritics(str) {
     return str.replace(/[^\u0000-\u007E]/g, function(a) {
         return diacriticsMap[a] || a;
-    });
+    })
 }
 
 module.exports = constants
