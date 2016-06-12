@@ -211,8 +211,8 @@ function sendGoalToUser(in_payload, user_id) {
 }
 
 function sendMatchResults(in_payload, user_id) {
-    var result = in_payload.team_1.country + " (" + in_payload.team_1.score + ") - " + in_payload.team_2.country + " (" + in_payload.team_2.score + ")";
-    var img = constants.getPicForMatch(constants.getCountryCode(in_payload.team_1.country), constants.getCountryCode(in_payload.team_2.country), 'results')
+    var result = constants.countryNames[in_payload.team_1.country] + " (" + in_payload.team_1.score + ") - " + constants.countryNames[in_payload.team_2.country] + " (" + in_payload.team_2.score + ")";
+    var img = constants.getPicForMatch(in_payload.team_1.country, in_payload.team_2.country, 'results')
     let carrousel = new CardCarrousel()
     carrousel.appendCard(result, in_payload.comment, img)
     carrousel.send(user_id)
@@ -324,16 +324,21 @@ var routes = function(app) {
     })
 
     app.post('/bot/send_message', (req, res) => {
+      console.log(req.body)
         User.count({}, function(err, count) {
             User.find(function(err, elems) {
                 elems.forEach(function(elem, idx) {
-                    if (elem.status == 'subscribed') {
+                    if (elem.status == 'subscribed' || elem.status == 'existent') {
                         if (req.body.type == 'text') {
                             sendTextToUser(req.body.text, elem.user_id)
                         } else if (req.body.type == 'goal') {
                             sendGoalToUser(req.body, elem.user_id)
                         } else if (req.body.type == 'match') {
+                          console.log(req.body)
+                          let tournament = req.body.tournament
+                          if (elem.tournaments.indexOf(tournament) > -1){
                             sendMatchResults(req.body, elem.user_id)
+                          }
                         } else if (req.body.type == 'start') {
                             sendMatchStart(req.body, elem.user_id)
                         }

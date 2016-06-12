@@ -14,6 +14,8 @@ app.controller('messagesCtrl', function($scope, $http) {
     $scope.match = {};
     $scope.start = {};
     $scope.active_card = 'text';
+    $scope.america = {}
+    $scope.euro = {}
 
     $scope.sendText = function() {
         if ($scope.text.text) {
@@ -55,17 +57,19 @@ app.controller('messagesCtrl', function($scope, $http) {
             });
     }
 
-    $scope.sendMatch = function() {
+    $scope.sendMatch = function(tournament) {
+        var tournament_key = tournament.toLowerCase();
         var payload = {
             type: 'match',
-            comment: $scope.match.comment,
+            tournament:tournament,
+            comment: $scope[tournament_key].match.comment,
             team_1: {
-                country: $scope.match.team_1,
-                score: $scope.match.team_1_score
+                country: $scope[tournament_key].match.team_1,
+                score: $scope[tournament_key].match.team_1_score
             },
             team_2: {
-                country: $scope.match.team_2,
-                score: $scope.match.team_2_score
+                country: $scope[tournament_key].match.team_2,
+                score: $scope[tournament_key].match.team_2_score
             }
         }
         console.log(payload);
@@ -96,6 +100,18 @@ app.controller('messagesCtrl', function($scope, $http) {
         },function error(response){
         	console.log(response);
         });
-
     }
+
+    function populateCountries(tournament){
+      $http.get('/api/countries/' + tournament)
+          .then(function success(response) {
+            console.log(response);
+              $scope[tournament.toLowerCase()].countries = response.data;
+          }, function(error) {
+              console.log(error);
+          })
+    }
+
+    populateCountries('EURO');
+    populateCountries('AMERICA');
 });
