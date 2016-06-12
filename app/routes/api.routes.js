@@ -97,7 +97,15 @@ var routes = function(app){
 	});
 
 	app.get('/updateUsers',function(req,res){
-		User.update({},{last_message:"none"},{multi:true},(err,raw)=>{
+		User.update({},{last_message:"none",tournaments:[]},{multi:true},(err,raw)=>{
+		console.log(raw)
+			if(err) return res.send(500, {error:err});
+			return res.send(raw);
+		})
+	});
+
+	app.get('/updateUsersTournaments',function(req,res){
+		User.update({status:'subscribed'},{tournaments:['AMERICA']},{multi:true},(err,raw)=>{
 		console.log(raw)
 			if(err) return res.send(500, {error:err});
 			return res.send(raw);

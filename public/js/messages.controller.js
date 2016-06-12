@@ -22,6 +22,7 @@ app.controller('messagesCtrl', function($scope, $http) {
             console.log($scope.text.text);
             var payload = {
                 type: 'text',
+                tournament:'AMERICA',
                 text: $scope.text.text
             }
             $http.post('/bot/send_message', payload)
@@ -36,6 +37,7 @@ app.controller('messagesCtrl', function($scope, $http) {
     $scope.sendGoal = function() {
         var payload = {
             type: 'goal',
+            tournament:'AMERICA',
             country: $scope.goal.scorer_country,
             minute: $scope.goal.minute,
             scorer: $scope.goal.scorer_name,
@@ -84,6 +86,7 @@ app.controller('messagesCtrl', function($scope, $http) {
     $scope.sendStart = function() {
         var payload = {
             type: 'start',
+            tournament:'AMERICA',
             comment: $scope.start.comment,
             team_1: {
                 country: $scope.start.team_1

@@ -203,10 +203,10 @@ function replyMessage(reply, replyText) {
 }
 
 function sendGoalToUser(in_payload, user_id) {
-    var info = in_payload.scorer + "\nMinuto " + in_payload.minute + "\n" + in_payload.team_1.country + " (" + in_payload.team_1.score + ") - " + in_payload.team_2.country + " (" + in_payload.team_2.score + ")";
-    let img = constants.pics.goals[constants.getCountryCode(in_payload.country)]
+    var info = in_payload.scorer + "\nMinuto " + in_payload.minute + "\n" + constants.countryNames[in_payload.team_1.country] + " (" + in_payload.team_1.score + ") - " + constants.countryNames[in_payload.team_2.country] + " (" + in_payload.team_2.score + ")"
+    let img = constants.pics.goals[in_payload.country]
     let carrousel = new CardCarrousel()
-    carrousel.appendCard('¡Gol de ' + in_payload.country + "!", info, img)
+    carrousel.appendCard('¡Gol de ' + constants.countryNames[in_payload.country] + "!", info, img)
     carrousel.send(user_id)
 }
 
@@ -219,8 +219,8 @@ function sendMatchResults(in_payload, user_id) {
 }
 
 function sendMatchStart(in_payload, user_id) {
-    var result = in_payload.team_1.country + " - " + in_payload.team_2.country + "";
-    var img = constants.getPicForMatch(constants.getCountryCode(in_payload.team_1.country), constants.getCountryCode(in_payload.team_2.country), 'start')
+    var result = constants.countryNames[in_payload.team_1.country] + " - " + constants.countryNames[in_payload.team_2.country]
+    var img = constants.getPicForMatch(in_payload.team_1.country, in_payload.team_2.country, 'start')
     let carrousel = new CardCarrousel()
     carrousel.appendCard(result, in_payload.comment, img)
     carrousel.send(user_id)
@@ -280,7 +280,7 @@ function sendTournamentPrompt(user, tournament) {
     if (tournament == 'AMERICA') {
         message = 'Hola ' + user.name + '! Soy un bot apasionado por el fútbol. ¿Me autorizas a enviarte notificaciones de todo lo que pase en la Copa América Centenario?'
     } else if (tournament == 'EURO') {
-        message = "¿Disfrutando de la Copa América " + user.name + "? Pues ahora también puedo hablar de la Eurocopa! No goles, no inicio de partidos, solo resultados para que estés enterado. ¿Deseas suscribirte a las notificaciones de la Eurocopa?"
+        message = "¿Disfrutando de la Copa América " + user.name + "? Pues ahora también puedo hablar de la Eurocopa! Sin notificaciones de goles ni inicio de partidos, solo resultados para que estés enterado. ¿Deseas suscribirte a las notificaciones de la Eurocopa?"
     }
     var payload = {
         'attachment': {
@@ -324,21 +324,18 @@ var routes = function(app) {
     })
 
     app.post('/bot/send_message', (req, res) => {
-      console.log(req.body)
+        console.log(req.body)
         User.count({}, function(err, count) {
             User.find(function(err, elems) {
                 elems.forEach(function(elem, idx) {
-                    if (elem.status == 'subscribed' || elem.status == 'existent') {
+                    let tournament = req.body.tournament
+                    if (elem.tournaments.indexOf(tournament) > -1) {
                         if (req.body.type == 'text') {
                             sendTextToUser(req.body.text, elem.user_id)
                         } else if (req.body.type == 'goal') {
                             sendGoalToUser(req.body, elem.user_id)
                         } else if (req.body.type == 'match') {
-                          console.log(req.body)
-                          let tournament = req.body.tournament
-                          if (elem.tournaments.indexOf(tournament) > -1){
                             sendMatchResults(req.body, elem.user_id)
-                          }
                         } else if (req.body.type == 'start') {
                             sendMatchStart(req.body, elem.user_id)
                         }
@@ -352,11 +349,15 @@ var routes = function(app) {
     app.post('/bot/sendEuroPrompt', (req, res) => {
         User.find((err, elems) => {
             elems.forEach((elem, idx) => {
-                sendTournamentPrompt(elem, 'EURO')
-                elem.last_message = 'tournament_prompt:EURO'
-                elem.save()
+                //Send prompt only if the user is not already subscribed
+                if (elem.tournaments.indexOf('EURO') == -1) {
+                    sendTournamentPrompt(elem, 'EURO')
+                    elem.last_message = 'tournament_prompt:EURO'
+                    elem.save()
+                }
             })
         })
+        return res.send("Messages sucessfully sent")
     })
 
     app.get('/bot/test', (req, res) => {

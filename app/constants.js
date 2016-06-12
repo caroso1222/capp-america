@@ -68,16 +68,16 @@ constants.pics = {
         FR_AL: "http://imgur.com/XwYOc8v.jpg",
         FR_RO: "http://imgur.com/TCJvujF.jpg",
         GA_SK: "http://imgur.com/YlwugKa.jpg",
-        GE_PO: "http://imgur.com/dGVGJWV.jpg",
-        GE_UA: "http://imgur.com/2qsrguQ.jpg",
+        DE_PL: "http://imgur.com/dGVGJWV.jpg",
+        DE_UA: "http://imgur.com/2qsrguQ.jpg",
         HU_PT: "http://imgur.com/vJEnAJ5.jpg",
         IE_SE: "http://imgur.com/2wIDyXP.jpg",
         IS_AT: "http://imgur.com/svdgrYD.jpg",
         IS_HU: "http://imgur.com/C0Ir6BU.jpg",
         IT_IE: "http://imgur.com/6yHdy4q.jpg",
         IT_SE: "http://imgur.com/QlIinJP.jpg",
-        NI_GE: "http://imgur.com/aWn0ddw.jpg",
-        PO_NI: "http://imgur.com/wu0z2ia.jpg",
+        NI_DE: "http://imgur.com/aWn0ddw.jpg",
+        PL_NI: "http://imgur.com/wu0z2ia.jpg",
         PT_AT: "http://imgur.com/jfPyj3s.jpg",
         PT_IS: "http://imgur.com/eKCXfMC.jpg",
         RO_AL: "http://imgur.com/NNySUbB.jpg",
@@ -87,7 +87,7 @@ constants.pics = {
         SE_BE: "http://imgur.com/HxUiioh.jpg",
         TR_HR: "http://imgur.com/hGdrp5T.jpg",
         UA_NI: "http://imgur.com/LHejvvM.jpg",
-        UA_PO: "http://imgur.com/djthuGv.jpg"
+        UA_PL: "http://imgur.com/djthuGv.jpg"
     },
     goals: {
         AR: "http://imgur.com/bOidB0E.jpg",
@@ -118,7 +118,11 @@ constants.getPicForMatch = function(country_1, country_2, type) {
         img = constants.pics[type][key];
     }
     if (!img) {
+      if(type=="start"){
         img = 'http://i.imgur.com/2bsRzkf.jpg'
+      }else{
+        img = 'http://i.imgur.com/UwNgclF.jpg'
+      }
     }
     return img
 }
